@@ -1,35 +1,31 @@
-var nameInput = document.getElementById("name");
-var submitButton = document.getElementById("submit");
-var pickWinnerButton = document.getElementById("pickWinner");
-var namesDisplay = document.getElementById("names");
-var winnerDisplay = document.getElementById("winner");
+let nameInput = document.getElementById(`nameInput`)
+let submitButton = document.getElementById(`submitButton`)
+let winnerButton = document.getElementById(`winnerButton`)
+let namesParagraph = document.getElementById(`namesParagraph`)
+let winnerParagraph = document.getElementById(`winnerParagraph`)
 
-var names = [];
+let names = []
 
-submitButton.addEventListener("click", submit);
-pickWinnerButton.addEventListener("click", pickWinner);
+submitButton.addEventListener(`click`, submit)
+winnerButton.addEventListener(`click`, pickWinner)
 
 function submit() {
-    var nameValue = nameInput.value.trim();
+  let nameValue = nameInput.value.trim()
 
-    if (nameValue.length > 0) {
-        names.push(nameValue);
+  if (nameValue != ``) {
+    namesParagraph.innerHTML = `${namesParagraph.innerHTML} ${nameValue}`
+    nameInput.value = ``
 
-        if (names.length > 1) {
-            namesDisplay.innerHTML = namesDisplay.innerHTML + ",";
-        }
-
-        namesDisplay.innerHTML = namesDisplay.innerHTML + " " + nameValue;
-        nameInput.value = "";
-    }
+    names.push(nameValue)
+  }
 }
 
 function pickWinner() {
-    if (names.length == 0) {
-        winnerDisplay.innerHTML = "Nobody was submitted.";
-    }
-    else {
-        var randomNumber = Math.floor(Math.random() * names.length);
-        winnerDisplay.innerHTML = "The winner is " + names[randomNumber] + ".";
-    }
+  if (names.length == 0) {
+    winnerParagraph.innerHTML = `Nobody was submitted.`
+  }
+  else {
+    let randomNumber = Math.floor(Math.random() * names.length)
+    winnerParagraph.innerHTML = `The winner is ${names[randomNumber]}.`
+  }
 }
