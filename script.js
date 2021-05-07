@@ -9,6 +9,9 @@ let names = []
 submitButton.addEventListener(`click`, submit)
 winnerButton.addEventListener(`click`, pickWinner)
 
+nameInput.addEventListener(`keydown`, keyPressed)
+nameInput.focus()
+
 function submit() {
   let nameValue = nameInput.value.trim()
 
@@ -18,14 +21,21 @@ function submit() {
 
     names.push(nameValue)
   }
+
+  nameInput.focus()
 }
 
 function pickWinner() {
   if (names.length == 0) {
     winnerParagraph.innerHTML = `Nobody was submitted.`
-  }
-  else {
+  } else {
     let randomNumber = Math.floor(Math.random() * names.length)
     winnerParagraph.innerHTML = `The winner is ${names[randomNumber]}.`
+  }
+}
+
+function keyPressed(event) {
+  if (event.keyCode == 13) {
+    submit()
   }
 }
